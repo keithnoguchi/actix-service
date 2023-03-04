@@ -3,12 +3,12 @@ use std::io;
 
 #[actix_web::main]
 async fn main() -> io::Result<()> {
-    let app = || App::new().configure(router);
+    let app = || App::new().configure(routes);
 
     HttpServer::new(app).bind("127.0.0.1:3000")?.run().await
 }
 
-fn router(cfg: &mut web::ServiceConfig) {
+fn routes(cfg: &mut web::ServiceConfig) {
     cfg.route("/health", web::get().to(health));
 }
 
