@@ -1,4 +1,4 @@
-use actix_web::{web, App, HttpServer};
+use actix_web::{web, App, HttpRequest, HttpResponse, HttpServer, Responder};
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
@@ -13,4 +13,10 @@ async fn main() -> std::io::Result<()> {
         .await
 }
 
-fn routes(_cfg: &mut web::ServiceConfig) {}
+fn routes(cfg: &mut web::ServiceConfig) {
+    cfg.route("/health", web::get().to(health));
+}
+
+async fn health(_req: HttpRequest) -> impl Responder {
+    HttpResponse::Ok().json("Hello.  It's up and running")
+}
