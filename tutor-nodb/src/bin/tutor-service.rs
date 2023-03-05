@@ -1,9 +1,17 @@
 use actix_web::{web, App, HttpRequest, HttpResponse, HttpServer, Responder};
 
+#[path = "../state.rs"]
+mod state;
+
+use state::State;
+
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
+    // Application state.
+    let state = web::Data::new(State::default());
+
     // Creates a web app factory.
-    let app = || App::new().configure(routes);
+    let app = move || App::new().app_data(state.clone()).configure(routes);
 
     // Starts a web server.
     HttpServer::new(app)
