@@ -30,7 +30,7 @@ pub async fn get_courses(state: web::Data<State>, path: web::Path<u32>) -> HttpR
         .unwrap()
         .iter()
         .filter(|c| c.tutor_id == tutor_id)
-        .map(|c| c.clone())
+        .cloned()
         .collect();
 
     HttpResponse::Ok().json(courses)
