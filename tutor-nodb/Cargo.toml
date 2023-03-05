@@ -16,3 +16,6 @@ name = "tutor-service"
 
 [[bin]]
 name = "basic-server"
+
+[dev-dependencies]
+tokio = { version = "1", features = ["full"] }

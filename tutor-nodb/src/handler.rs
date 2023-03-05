@@ -4,11 +4,11 @@ use chrono::Utc;
 use crate::model::Course;
 use crate::state::State;
 
-pub(crate) async fn new_course(course: web::Json<Course>, state: web::Data<State>) -> HttpResponse {
+pub async fn new_course(course: web::Json<Course>, state: web::Data<State>) -> HttpResponse {
     let mut courses = state.courses.write().unwrap();
     let course_count = courses
         .iter()
-        .filter(|course| course.tutor_id == course.tutor_id)
+        .filter(|c| c.tutor_id == course.tutor_id)
         .count() as u32;
 
     let new_course = Course {

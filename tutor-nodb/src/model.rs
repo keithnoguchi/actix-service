@@ -3,11 +3,11 @@ use chrono::naive::NaiveDateTime;
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
-pub(crate) struct Course {
-    pub(crate) tutor_id: u32,
-    pub(crate) course_id: Option<u32>,
-    pub(crate) course_name: String,
-    pub(crate) posted_time: Option<NaiveDateTime>,
+pub struct Course {
+    pub tutor_id: u32,
+    pub course_id: Option<u32>,
+    pub course_name: String,
+    pub posted_time: Option<NaiveDateTime>,
 }
 
 impl From<web::Json<Course>> for Course {
