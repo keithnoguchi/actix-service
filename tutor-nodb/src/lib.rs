@@ -1,5 +1,5 @@
 mod handler;
+pub mod router;
 mod state;
 
-pub use handler::health;
 pub use state::State;
