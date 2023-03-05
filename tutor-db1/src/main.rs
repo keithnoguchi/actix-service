@@ -1,8 +1,8 @@
-use actix_web::{web, HttpResponse};
+use tutor_db1::router;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    let app = || actix_web::App::new().route("/", web::get().to(index));
+    let app = || actix_web::App::new().configure(router::general);
 
     actix_web::HttpServer::new(app)
         .bind("127.0.0.1:3000")?
@@ -11,8 +11,4 @@ async fn main() -> std::io::Result<()> {
         .await?;
 
     Ok(())
-}
-
-async fn index() -> HttpResponse {
-    HttpResponse::Ok().body("Hello World!")
 }
