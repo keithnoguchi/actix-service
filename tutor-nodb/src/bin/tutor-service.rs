@@ -1,4 +1,4 @@
-use actix_web::{web, App, HttpRequest, HttpResponse, HttpServer, Responder};
+use actix_web::{web, App, HttpServer};
 
 use tutor_nodb::State;
 
@@ -19,9 +19,5 @@ async fn main() -> std::io::Result<()> {
 }
 
 fn routes(cfg: &mut web::ServiceConfig) {
-    cfg.route("/health", web::get().to(health));
-}
-
-async fn health(_req: HttpRequest) -> impl Responder {
-    HttpResponse::Ok().json("Hello.  It's up and running")
+    cfg.route("/health", web::get().to(tutor_nodb::health));
 }
