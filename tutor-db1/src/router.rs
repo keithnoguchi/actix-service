@@ -6,3 +6,10 @@ pub fn general(cfg: &mut web::ServiceConfig) {
     cfg.route("/", web::get().to(handler::index))
         .route("/health", web::get().to(handler::health));
 }
+
+pub fn courses(cfg: &mut web::ServiceConfig) {
+    cfg.service(
+        web::scope("/courses")
+            .route("/", web::post().to(handler::new_course)),
+    );
+}
