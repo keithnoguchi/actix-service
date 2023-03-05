@@ -20,6 +20,20 @@ pub(crate) async fn health(state: web::Data<State>) -> HttpResponse {
     ))
 }
 
-pub(crate) async fn new_course(_new_course: web::Json<Course>) -> HttpResponse {
+pub(crate) async fn new_course(
+    _state: web::Data<State>,
+    _new_course: web::Json<Course>,
+) -> HttpResponse {
     HttpResponse::Ok().json("success")
+}
+
+pub(crate) async fn get_courses(_state: web::Data<State>, _path: web::Path<u32>) -> HttpResponse {
+    HttpResponse::NotImplemented().finish()
+}
+
+pub(crate) async fn get_course(
+    _state: web::Data<State>,
+    _path: web::Path<(u32, u32)>,
+) -> HttpResponse {
+    HttpResponse::NotImplemented().finish()
 }
