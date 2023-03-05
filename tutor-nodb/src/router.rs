@@ -7,5 +7,7 @@ pub fn default_routes(cfg: &mut web::ServiceConfig) {
 }
 
 pub fn course_routes(cfg: &mut web::ServiceConfig) {
-    cfg.service(web::scope("/courses").route("/", web::post().to(handler::new_course)));
+    cfg.service(web::scope("/courses")
+                .route("/", web::post().to(handler::new_course))
+                .route("/{tutor_id}", web::get().to(handler::get_courses)));
 }

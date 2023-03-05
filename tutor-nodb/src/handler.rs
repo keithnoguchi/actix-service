@@ -22,6 +22,20 @@ pub async fn new_course(course: web::Json<Course>, state: web::Data<State>) -> H
     HttpResponse::Ok().json("Added course")
 }
 
+pub(crate) async fn get_courses(state: web::Data<State>, path: web::Path<u32>) -> HttpResponse {
+    let tutor_id = path.into_inner();
+    let courses: Vec<Course> = state
+        .courses
+        .read()
+        .unwrap()
+        .iter()
+        .filter(|c| c.tutor_id == tutor_id)
+        .map(|c| c.clone())
+        .collect();
+
+    HttpResponse::Ok().json(courses)
+}
+
 pub(crate) async fn health(state: web::Data<State>) -> HttpResponse {
     let msg = &state.message;
     let resp = {
