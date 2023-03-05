@@ -1,9 +1,6 @@
 use actix_web::{web, App, HttpRequest, HttpResponse, HttpServer, Responder};
 
-#[path = "../state.rs"]
-mod state;
-
-use state::State;
+use tutor_nodb::State;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
