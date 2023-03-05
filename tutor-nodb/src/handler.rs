@@ -36,6 +36,23 @@ pub async fn get_courses(state: web::Data<State>, path: web::Path<u32>) -> HttpR
     HttpResponse::Ok().json(courses)
 }
 
+pub async fn get_course(state: web::Data<State>, path: web::Path<(u32, u32)>) -> HttpResponse {
+    let (tutor_id, course_id) = path.into_inner();
+    let course = state
+        .courses
+        .read()
+        .unwrap()
+        .iter()
+        .find(|c| c.tutor_id == tutor_id && c.course_id == Some(course_id))
+        .cloned();
+
+    if let Some(course) = course {
+        HttpResponse::Ok().json(course)
+    } else {
+        HttpResponse::Ok().json("Course not found")
+    }
+}
+
 pub(crate) async fn health(state: web::Data<State>) -> HttpResponse {
     let msg = &state.message;
     let resp = {
