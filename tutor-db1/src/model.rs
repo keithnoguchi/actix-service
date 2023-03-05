@@ -1,8 +1,8 @@
 use actix_web::web;
 use chrono::NaiveDateTime;
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Serialize)]
 pub(crate) struct Course {
     pub(crate) course_id: u32,
     pub(crate) tutor_id: u32,

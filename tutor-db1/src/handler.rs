@@ -1,5 +1,6 @@
 use std::sync::atomic::Ordering;
 
+use crate::db;
 use crate::model::Course;
 use crate::state::State;
 
@@ -21,19 +22,30 @@ pub(crate) async fn health(state: web::Data<State>) -> HttpResponse {
 }
 
 pub(crate) async fn new_course(
-    _state: web::Data<State>,
-    _new_course: web::Json<Course>,
+    state: web::Data<State>,
+    new_course: web::Json<Course>,
 ) -> HttpResponse {
-    HttpResponse::NotImplemented().json("not implemented")
+    match db::add_course(&state.db, new_course.into()).await {
+        Ok(course) => HttpResponse::Ok().json(course),
+        Err(e) => HttpResponse::InternalServerError().json(e.to_string()),
+    }
 }
 
-pub(crate) async fn get_courses(_state: web::Data<State>, _path: web::Path<u32>) -> HttpResponse {
-    HttpResponse::NotImplemented().json("not implemented")
+pub(crate) async fn get_courses(state: web::Data<State>, path: web::Path<u32>) -> HttpResponse {
+    let tutor_id = path.into_inner();
+    match db::get_courses(&state.db, tutor_id).await {
+        Ok(course) => HttpResponse::Ok().json(course),
+        Err(e) => HttpResponse::InternalServerError().json(e.to_string()),
+    }
 }
 
 pub(crate) async fn get_course(
-    _state: web::Data<State>,
-    _path: web::Path<(u32, u32)>,
+    state: web::Data<State>,
+    path: web::Path<(u32, u32)>,
 ) -> HttpResponse {
-    HttpResponse::NotImplemented().json("not implemented")
+    let (tutor_id, course_id) = path.into_inner();
+    match db::get_course(&state.db, tutor_id, course_id).await {
+        Ok(courses) => HttpResponse::Ok().json(courses),
+        Err(e) => HttpResponse::InternalServerError().json(e.to_string()),
+    }
 }
