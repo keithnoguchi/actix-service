@@ -23,3 +23,12 @@ async fn get_courses_handler() {
     let resp = handler::get_courses(state, path).await;
     assert_eq!(resp.status(), http::StatusCode::OK);
 }
+
+#[tokio::test]
+async fn get_course_handler() {
+    let state = web::Data::new(state::State::default());
+    let path = web::Path::from((1, 1));
+
+    let resp = handler::get_course(state, path).await;
+    assert_eq!(resp.status(), http::StatusCode::OK);
+}
