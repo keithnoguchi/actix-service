@@ -1679,6 +1679,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "tutor-db1"
+version = "0.1.0"
+dependencies = [
+ "actix-web",
+ "sqlx",
+]
+
+[[package]]
 name = "tutor-nodb"
 version = "0.1.0"
 dependencies = [
