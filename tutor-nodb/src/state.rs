@@ -1,15 +1,19 @@
-use std::sync::Mutex;
+use std::sync::{Mutex, RwLock};
 
+use crate::model::Course;
+
+#[derive(Default)]
 pub struct State {
-    pub message: String,
-    pub count: Mutex<u32>,
+    pub(crate) message: String,
+    pub(crate) count: Mutex<u32>,
+    pub(crate) courses: RwLock<Vec<Course>>,
 }
 
-impl Default for State {
-    fn default() -> Self {
+impl State {
+    pub fn new() -> Self {
         Self {
             message: "I'm good, thank you".into(),
-            count: Mutex::new(0),
+            ..Self::default()
         }
     }
 }
