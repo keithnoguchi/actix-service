@@ -1711,7 +1711,9 @@ name = "tutor-db2"
 version = "0.1.0"
 dependencies = [
  "actix-web",
+ "dotenvy",
  "eyre",
+ "sqlx",
 ]
 
 [[package]]
