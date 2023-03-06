@@ -1,0 +1,8 @@
+[package]
+name = "tutor-db2"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+actix-web = "4"
+eyre = "0.6.8"

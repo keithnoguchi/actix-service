@@ -4,4 +4,5 @@ members = [
     "tutor-nodb",
     "tutor-cli",
     "tutor-db1",
+    "tutor-db2",
 ]
