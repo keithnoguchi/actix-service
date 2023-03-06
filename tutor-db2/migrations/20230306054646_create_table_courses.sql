@@ -6,6 +6,7 @@ CREATE TABLE course5 (
 	course_name TEXT NOT NULL,
 	posted_time TIMESTAMP default now()
 );
+GRANT ALL PRIVILEGES ON TABLE course5 to dev;
 INSERT INTO course5
 	(course_id, tutor_id, course_name, posted_time)
 	VALUES(1, 1, 'First course', '2022-12-17 05:40:00');

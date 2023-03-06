@@ -42,6 +42,11 @@ done
 
 >&2 echo "Postgres is up and running on port ${DB_PORT}!"
 
+psql -h ${DB_ADDR} -U ${DB_USER} -p ${DB_PORT} -d postgres \
+	-c "CREATE USER dev WITH PASSWORD 'dev123';"
+psql -h ${DB_ADDR} -U ${DB_USER} -p ${DB_PORT} -d postgres \
+	-c "ALTER DATABASE ${DB_NAME} OWNER TO dev;"
+
 # install sqlx cli.
 cargo install sqlx-cli --no-default-features --features rustls,postgres
 
